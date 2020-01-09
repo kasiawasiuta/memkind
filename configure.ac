@@ -91,6 +91,7 @@ if test "x${enable_decorators}" = "x1" ; then
 fi
 AC_SUBST([enable_decorators])
 
+
 #============================debug=============================================
 AC_ARG_ENABLE([debug],
   [AS_HELP_STRING([--enable-debug], [Build debugging code and compile with -O0 -g])],
@@ -207,6 +208,14 @@ if test $daxctl_kmem = "yes" ; then
     LDFLAGS="$LDFLAGS -ldaxctl"
 fi
 AC_SUBST([enable_daxctl])
+
+#============================lto========================================
+
+lto_cflag=""
+if test "$CFLAGS" == *"-flto"* ; then
+  lto_cflag="-flto=jobserver"
+fi
+AC_SUBST([lto_cflag])
 
 #============================cxx11=============================================
 
